@@ -1,0 +1,22 @@
+.root {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.word {
+	display: flex;
+	justify-content: center;
+}
+
+.letterContainer {
+	display: flex;
+	border: 2px solid black;
+	width: 60px;
+	height: 60px;
+	margin: 3px;
+	justify-content: center;
+	align-items: center;
+  font-size: 25px
+}
