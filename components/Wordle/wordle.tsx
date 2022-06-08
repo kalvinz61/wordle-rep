@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./wordle.module.css";
 
 export default function Wordle() {
@@ -40,15 +41,22 @@ export default function Wordle() {
 	useEffect(() => {
 		console.log(guess);
 		console.log(submittedGuesses);
+		console.log(word);
 		if (submittedGuesses.length === 6 && winOrLose === false) {
 			window.alert("game over");
 		} else if (winOrLose) {
 			window.alert("You Win!");
 		}
-	}, [submittedGuesses, winOrLose, guess]);
+	}, [submittedGuesses, winOrLose, guess, word]);
 
 	//Get word
-
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data } = await axios.get("https://random-word-api.herokuapp.com/word?length=5");
+			setWord(data);
+		};
+		fetchData();
+	}, []);
 	return (
 		<div className={styles.root}>
 			<h1>WORDLE-REP</h1>
