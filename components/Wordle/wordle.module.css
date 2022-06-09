@@ -5,6 +5,10 @@
 	width: 100%;
 }
 
+.title {
+	display: flex;
+	justify-content: center;
+}
 .word {
 	display: flex;
 	justify-content: center;
@@ -18,5 +22,5 @@
 	margin: 3px;
 	justify-content: center;
 	align-items: center;
-  font-size: 25px
+	font-size: 25px;
 }

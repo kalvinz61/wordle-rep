@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./wordle.module.css";
 
@@ -59,7 +59,7 @@ export default function Wordle() {
 
 	return (
 		<div className={styles.root}>
-			<h1>WORDLE-REP</h1>
+			<h1 className={styles.title}>WORDLE-REP</h1>
 			<PreviousGuesses submittedGuesses={submittedGuesses} />
 			<CurrentGuess guess={guess} />
 			{Array.from({ length: 5 - submittedGuesses.length }).map((row, idx) => {
@@ -99,15 +99,21 @@ type PreviousGuessesProps = {
 	submittedGuesses: string[][];
 };
 function PreviousGuesses({ submittedGuesses }: PreviousGuessesProps) {
-	return submittedGuesses.map((guess, idx) => {
-		return <div className={styles.word} key={idx}>
-			{guess.map((letter, idx) => {
+	return (
+		<React.Fragment>
+			{submittedGuesses.map((guess, idx) => {
 				return (
-					<div className={styles.letterContainer} key={idx}>
-						{letter}
+					<div className={styles.word} key={idx}>
+						{guess.map((letter, idx) => {
+							return (
+								<div className={styles.letterContainer} key={idx}>
+									{letter}
+								</div>
+							);
+						})}
 					</div>
 				);
 			})}
-		</div>;
-	});
+		</React.Fragment>
+	);
 }
