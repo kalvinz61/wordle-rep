@@ -7,7 +7,7 @@ import axios from "axios";
 import styles from "./wordle.module.css";
 
 export default function Wordle() {
-	const [word, setWord] = useState("");
+	const [word, setWord] = useState<string>("");
 	const [guess, setGuess] = useState<string[]>([]);
 	const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([]);
 	const [winOrLose, setWinOrLose] = useState<boolean>(false);
@@ -16,17 +16,21 @@ export default function Wordle() {
 		async function handleKeydown({ key }: { key: string }) {
 			const isChar = isAlphabet(key);
 			switch (key) {
-        //Only add to guess if alphabetical letter.
+				//Only add to guess if alphabetical letter.
 				case isChar:
+          //Needs better fix, guess.length is one step behind because setState is async.
+					if (guess.length > 4) {
+						break;
+					}
 					setGuess((prev) => [...prev, key.toUpperCase()]);
 					break;
-        //Remove last letter added
+				//Remove last letter added
 				case "Backspace":
 					const copy = [...guess];
 					copy.pop();
 					setGuess(copy);
 					break;
-        //Submit guess only if 5 chars long and valid dictionary word.
+				//Submit guess only if 5 chars long and valid dictionary word.
 				case "Enter":
 					if (guess.length === 5) {
 						const checkWord = guess.join("");
@@ -62,20 +66,20 @@ export default function Wordle() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data } = await axios.get("https://random-word-api.herokuapp.com/word?length=5");
-			setWord(data);
+			setWord(data[0]);
 		};
 		fetchData();
 	}, []);
 
 	//logging
 	useEffect(() => {
-		console.log(word);
+		console.log("word", word);
 	}, [word, submittedGuesses]);
 
 	return (
 		<div className={styles.root}>
 			<h1 className={styles.title}>WORDLE-REP</h1>
-			<PreviousGuesses submittedGuesses={submittedGuesses} />
+			<PreviousGuesses submittedGuesses={submittedGuesses} word={word} />
 			{submittedGuesses.length >= 6 ? null : <CurrentGuess guess={guess} />}
 			{Array.from({ length: 5 - submittedGuesses.length }).map((row, idx) => {
 				return <EmptyGuess key={idx} />;
