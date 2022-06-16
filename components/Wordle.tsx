@@ -3,8 +3,9 @@ import { EmptyGuess } from "./EmptyGuess";
 import { CurrentGuess } from "./CurrentGuess";
 import { PreviousGuesses } from "./PreviousGuess";
 import { checkDictionary, isAlphabet } from "../utils";
+import { Keyboard } from "./Keyboard";
 import axios from "axios";
-import styles from "./wordle.module.css";
+import styles from "../styles/wordle.module.css";
 
 export default function Wordle() {
 	const [word, setWord] = useState<string>("");
@@ -18,7 +19,7 @@ export default function Wordle() {
 			switch (key) {
 				//Only add to guess if alphabetical letter.
 				case isChar:
-          //Needs better fix, guess.length is one step behind because setState is async.
+					//Needs better fix, guess.length is one step behind because setState is async.
 					if (guess.length > 4) {
 						break;
 					}
@@ -84,6 +85,7 @@ export default function Wordle() {
 			{Array.from({ length: 5 - submittedGuesses.length }).map((row, idx) => {
 				return <EmptyGuess key={idx} />;
 			})}
+			<Keyboard />
 		</div>
 	);
 }

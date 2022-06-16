@@ -1,0 +1,55 @@
+.title {
+	display: flex;
+	justify-content: center;
+}
+.word {
+	display: flex;
+	justify-content: center;
+	font-weight: bold;
+}
+
+.letterContainer {
+	display: flex;
+	border: 2px solid black;
+	width: 60px;
+	height: 60px;
+	margin: 3px;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	background-color: rgba(58, 58, 60, 255);
+	border: solid 1px rgba(58, 58, 60, 255);
+}
+
+.emptyContainer {
+	background-color: rgba(18, 18, 19, 255);
+}
+.green {
+	background-color: rgba(83, 141, 78, 255);
+}
+
+.yellow {
+	background-color: rgba(181, 159, 59, 255);
+}
+
+.keyboard {
+	display: flex;
+	flex-direction: column;
+	margin-top: 5em;
+}
+
+.keyboardRow {
+	display: flex;
+	justify-content: center;
+}
+
+.keyboardChar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	width: 40px;
+  margin: 3px;
+  border-radius: 3px;
+  background-color: rgba(129,131,132,255);
+}
